@@ -10,25 +10,25 @@ html, body{
 /* ===== Background Responsivines ===== */
 @media screen and (max-width: 2500px) {
     .game{
-        height: 87.2%;
+        height: 100%;
         width: 100%;
     }
 }
 @media screen and (max-width: 992px) {
     .game{
-        height: 87.8%;
+        height: 100%;
         width: 100%;
     }
 }
 @media screen and (max-width: 768px) {
     .game{
-        height: 89.5%;
+        height: 100%;
         width: 100%;
     }
 }
 @media screen and (max-width: 576px) {
     .game{
-        height: 90.6%;
+        height: 100%;
         width: 100%;
     }
 }
