@@ -7,6 +7,9 @@ html, body{
 .game, .upgrades{
     background: #6BBFA7;
 }
+.game {
+    height: 200%;
+}
 
 /* ===== Background Responsivines ===== */
 /* @media screen and (max-width: 2500px) {
