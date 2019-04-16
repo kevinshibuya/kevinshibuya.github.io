@@ -1,233 +1,114 @@
-var breno = document.querySelector("button#breno");
-var buyBreno = document.querySelector("button#buyBreno");
-var caio = document.querySelector("button#caio");
-var buyCaio = document.querySelector("button#buyCaio");
-var castro = document.querySelector("button#castro");
-var buyCastro = document.querySelector("button#buyCastro");
-var hazard = document.querySelector("button#hazard");
-var buyHazard = document.querySelector("button#buyHazard");
-var dk = document.querySelector("button#dk");
-var buyDk = document.querySelector("button#buyDk");
-var jales = document.querySelector("button#jales");
-var buyJales = document.querySelector("button#buyJales");
-var gabriel = document.querySelector("button#gabriel");
-var buyGabriel = document.querySelector("button#buyGabriel");
-var gui = document.querySelector("button#gui");
-var buyGui = document.querySelector("button#buyGui");
-var misa = document.querySelector("button#misa");
-var buyMisa = document.querySelector("button#buyMisa");
-var buyTDX = document.querySelector("#buyTDX");
-var points = document.querySelector("span.point");
-var reset = document.querySelector("#reset");
-var upgrades = document.querySelector("#upgrades");
-var upgrades1 = document.querySelector(".upgrades");
-var home = document.querySelector("#home");
-var game = document.querySelector("#game");
-var caioB = false;
-var castroB = false;
-var hazardB = false;
-var dkB = false;
-var jalesB = false;
-var gabrielB = false;
-var guiB = false;
-var misaB = false;
-var tdxB = false;
+var numSquares = 6;
+var colors = [];
+var pickedColor;
+var squares = document.querySelectorAll(".square");
+var colorDisplay = document.getElementById("colorDisplay");
+var messageDisplay = document.querySelector("#message");
+var h1 = document.getElementsByTagName("h1");
+var resetBtn = document.getElementById("resetBtn");
+var modeBtn = document.querySelectorAll(".mode");
 
-var score = 0;
-upgrades1.style.display = "none";
-caio.style.visibility = "hidden";
-castro.style.visibility = "hidden";
-hazard.style.visibility = "hidden";
-dk.style.visibility = "hidden";
-jales.style.visibility = "hidden";
-gabriel.style.visibility = "hidden";
-gui.style.visibility = "hidden";
-misa.style.visibility = "hidden";
-buyCastro.style.visibility = "hidden";
-buyHazard.style.visibility = "hidden";
-buyDk.style.visibility = "hidden";
-buyJales.style.visibility = "hidden";
-buyGabriel.style.visibility = "hidden";
-buyGui.style.visibility = "hidden";
-buyMisa.style.visibility = "hidden";
-buyTDX.style.visibility = "hidden"
-
-breno.addEventListener("click", function() {
-    score++;
-    points.textContent = score;
+init();
+//game reset button
+resetBtn.addEventListener("click", function() {
+    reset();
 })
-caio.addEventListener("click", function() {
-    score += 2;
-    points.textContent = score;
-})
-castro.addEventListener("click", function() {
-    score += 5;
-    points.textContent = score;
-})
-hazard.addEventListener("click", function() {
-    score += 10;
-    points.textContent = score;
-})
-dk.addEventListener("click", function() {
-    score += 15;
-    points.textContent = score;
-})
-jales.addEventListener("click", function() {
-    score += 20;
-    points.textContent = score;
-})
-gabriel.addEventListener("click", function() {
-    score += 30;
-    points.textContent = score;
-})
-gui.addEventListener("click", function() {
-    score += 50;
-    points.textContent = score;
-})
-misa.addEventListener("click", function() {
-    score += 100;
-    points.textContent = score;
-})
-reset.addEventListener("click", function() {
-    score = 0;
-    points.textContent = score;
-    caio.style.visibility = "hidden";
-    castro.style.visibility = "hidden";
-    hazard.style.visibility = "hidden";
-    dk.style.visibility = "hidden";
-    jales.style.visibility = "hidden";
-    gabriel.style.visibility = "hidden";
-    gui.style.visibility = "hidden";
-    misa.style.visibility = "hidden";
-    buyCastro.style.visibility = "hidden";
-    buyHazard.style.visibility = "hidden";
-    buyDk.style.visibility = "hidden";
-    buyJales.style.visibility = "hidden";
-    buyGabriel.style.visibility = "hidden";
-    buyGui.style.visibility = "hidden";
-    buyMisa.style.visibility = "hidden";
-    buyTDX.style.visibility = "hidden"
-    caioB = false;
-    castroB = false;
-    hazardB = false;
-    dkB = false;
-    jalesB = false;
-    gabrielB = false;
-    guiB = false;
-    misaB = false;
-    tdxB = false;
-})
-
-upgrades.addEventListener("click", function() {
-    upgrades1.style.display = "block";
-    game.style.display = "none";
-})
-home.addEventListener("click", function() {
-    upgrades1.style.display = "none";
-    game.style.display = "block";
-})
-
-buyCaio.addEventListener("click", function() {
-    if (score >= 20 && caioB == false){
-        caio.style.visibility = "visible";
-        buyCastro.style.visibility = "visible"
-        caioB = true;
-        score -= 20;
-        points.textContent = score;
+//initialize the program
+function init() {
+    setupModeBtns();
+    setupColorsBtns();
+    reset();
+}
+//add event listeners to mode btns
+function setupModeBtns() {
+    for (var i = 0; i < modeBtn.length; i++) {
+        modeBtn[i].addEventListener("click", function() {
+            modeBtn[0].classList.remove("selected");
+            modeBtn[1].classList.remove("selected");
+            this.classList.add("selected");
+            this.textContent === "Easy" ? numSquares = 3: numSquares = 6;
+            reset();
+        })
     }
-})
-buyCastro.addEventListener("click", function() {
-    if (score >= 40 && castroB == false){
-        castro.style.visibility = "visible";
-        buyHazard.style.visibility = "visible"
-        castroB = true;
-        score -= 40;
-        points.textContent = score;
+}
+//apply buttons colors
+function setupColorsBtns() {
+    for (var i = 0; i < squares.length; i++) {
+        //add color to squares
+        squares[i].style.backgroundColor = colors[i];
+        //add click event
+        squares[i].addEventListener("click", function() {
+            //grab color of clicked square
+            var clickedColor = this.style.backgroundColor;
+            //compare clickedColor to correct answer
+            if (clickedColor == pickedColor) {
+                messageDisplay.textContent = "Correct!";
+                changeColors(clickedColor);
+                h1[0].style.backgroundColor = clickedColor;
+                resetBtn.textContent = "Play Again?"
+            }
+            else {
+                this.style.backgroundColor = "#232323";
+                messageDisplay.textContent = "Try again!";
+            }
+        });
     }
-})
-buyHazard.addEventListener("click", function() {
-    if (score >= 100 && hazardB == false){
-        hazard.style.visibility = "visible";
-        buyDk.style.visibility = "visible";
-        hazardB = true;
-        score -= 100;
-        points.textContent = score;
+}
+//reset the game
+function reset() {
+    //generate new colors
+    colors = generateRandomColors(numSquares);
+    //pick new random color button
+    pickedColor = pickColor();
+    //match colorDisplay with pickedColor
+    colorDisplay.textContent = pickedColor;
+    //change color of squares
+    for (var i = 0; i < squares.length; i++) {
+        if (colors[i]) {
+            squares[i].style.display = "block";
+            squares[i].style.backgroundColor = colors[i];
+        }
+        else {
+            squares[i].style.display = "none"
+        }
     }
-})
-buyDk.addEventListener("click", function() {
-    if (score >= 300 && dkB == false){
-        dk.style.visibility = "visible";
-        buyJales.style.visibility = "visible";
-        dkB = true;
-        score -= 300;
-        points.textContent = score;
+    //sets background color back to default
+    h1[0].style.backgroundColor = "#F26666";
+    //clears span
+    messageDisplay.textContent = "";
+    //sets button text content back to default
+    resetBtn.textContent = "New Color"
+}
+//change colors from all buttons to the correct clicked one
+function changeColors (color) {
+    for (var i = 0; i < squares.length; i++) {
+        squares[i].style.backgroundColor = color;
     }
-})
-buyJales.addEventListener("click", function() {
-    if (score >= 600 && jalesB == false){
-        jales.style.visibility = "visible";
-        buyGabriel.style.visibility = "visible";
-        jalesB = true;
-        score -= 600;
-        points.textContent = score;
+}
+//select a random correct color button
+function pickColor() {
+    var random = Math.floor(Math.random() * colors.length);
+    return colors[random];
+}
+//get random colors and push them into an array
+function generateRandomColors(num) {
+    //make an array
+    var arr = [];
+    //repeat num times
+    for (var i = 0; i < num; i++) {
+        //get random color and push into arr
+        arr.push(randomColor());
     }
-})
-buyGabriel.addEventListener("click", function() {
-    if (score >= 1000 && gabrielB == false){
-        gabriel.style.visibility = "visible";
-        buyGui.style.visibility = "visible";
-        gabrielB = true;
-        score -= 1000;
-        points.textContent = score;
-    }
-})
-buyGui.addEventListener("click", function() {
-    if (score >= 2000 && guiB == false){
-        gui.style.visibility = "visible";
-        buyMisa.style.visibility = "visible";
-        guiB = true;
-        score -= 2000;
-        points.textContent = score;
-    }
-})
-buyMisa.addEventListener("click", function() {
-    if (score >= 5000 && misaB == false){
-        misa.style.visibility = "visible";
-        buyTDX.style.visibility = "visible";
-        misaB = true;
-        score -= 5000;
-        points.textContent = score;
-    }
-})
-buyTDX.addEventListener("click", function() {
-    if (score >= 10000 && tdxB == false){
-        alert("Boa tu compro o grupo do what's do TDX, agora tu pode me mama.")
-        score = 0;
-        points.textContent = score;
-        caio.style.visibility = "hidden";
-        castro.style.visibility = "hidden";
-        hazard.style.visibility = "hidden";
-        dk.style.visibility = "hidden";
-        jales.style.visibility = "hidden";
-        gabriel.style.visibility = "hidden";
-        gui.style.visibility = "hidden";
-        misa.style.visibility = "hidden";
-        buyCastro.style.visibility = "hidden";
-        buyHazard.style.visibility = "hidden";
-        buyDk.style.visibility = "hidden";
-        buyJales.style.visibility = "hidden";
-        buyGabriel.style.visibility = "hidden";
-        buyGui.style.visibility = "hidden";
-        buyMisa.style.visibility = "hidden";
-        buyTDX.style.visibility = "hidden"
-        caioB = false;
-        castroB = false;
-        hazardB = false;
-        dkB = false;
-        jalesB = false;
-        gabrielB = false;
-        guiB = false;
-        misaB = false;
-        tdxB = false;
-    }
-})
+    //return array
+    return arr;
+}
+//generate random rgb colors
+function randomColor() {
+    //get random red color from 0 to 255
+    var r = Math.floor(Math.random() * 256);
+    //get random green color from 0 to 255
+    var g = Math.floor(Math.random() * 256);
+    //get random blue color from 0 to 255
+    var b = Math.floor(Math.random() * 256);
+    return "rgb(" + r + ", " + g + ", " + b + ")";
+}
