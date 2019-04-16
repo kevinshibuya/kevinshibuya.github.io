@@ -1,72 +1,42 @@
 <!doctype html>
 <html lang="en">
     <head>
-        <!-- Required meta tags -->
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-        
-        <!-- Bootstrap CSS -->
+
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
         <script defer src="https://use.fontawesome.com/releases/v5.8.1/js/all.js" integrity="sha384-g5uSoOSBd7KkhAMlnQILrecXvzst9TdC09/VM+pjDTCM+1il8RHz5fKANTFFb+gQ" crossorigin="anonymous"></script>
-        <link rel="stylesheet" href="https://sadkevin.github.io/gameStyle.css">
-        <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css?family=Muli" rel="stylesheet">
+        <link rel="stylesheet" href="/sadkevin.github.io/indexStyle.css">
 
-        <title>TDX Clicker</title>
+        <title>Color Game</title>
     </head>
     <body>
-        <section class="menu p-3">
-            <p class="p mb-1">TDX Clicker</p>
-            <button id="home" type="button" class="my-btn mt-md-3 mt-lg-3 mt-xl-3 ml-4 btn1">Home</button>
-            <button id="upgrades" class="my-btn mt-md-3 mt-lg-3 mt-xl-3 btn1">Upgrades</button>
-            <button id="reset" class="my-btn mt-md-3 mt-lg-3 mt-xl-3 btn1">Reset</button>
-        </section>
-        <section class="upgrades">
-            <div class="container">
-                    <p class="upgrade mt-5 m-4">Upgrades: </p>
-                <div class="row d-flex justify-content-center align-items-center">
-                    <button id="buyBreno" class="col-xl-2 m-5 game-btn" disabled>Breno.<br>0 Cucks.</button>
-                    <button id="buyCaio" class="col-xl-2 m-5 game-btn">Caio.<br>20 Cucks.</button>
-                    <button id="buyCastro" class="col-xl-2 m-5 game-btn">Castro.<br>40 Cucks.</button>
-                </div>
-                <div class="row d-flex justify-content-center align-items-center">
-                    <button id="buyHazard" class="col-xl-2 m-5 game-btn">Hazard.<br>100 Cucks.</button>
-                    <button id="buyDk" class="col-xl-2 m-5 game-btn">DK.<br>300 Cucks.</button>
-                    <button id="buyJales" class="col-xl-2 m-5 game-btn">Jales.<br>600 Cucks.</button>
-                </div>
-                <div class="row d-flex justify-content-center align-items-center">
-                    <button id="buyGabriel" class="col-xl-2 m-5 game-btn">Gabriel.<br>1000 Cucks.</button>
-                    <button id="buyGui" class="col-xl-2 m-5 game-btn">Gui.<br>2000 Cucks</button>
-                    <button id="buyMisa" class="col-xl-2 m-5 game-btn">Misa.<br>5000 Cucks</button>
-                </div>
-                <div class="row d-flex justify-content-center align-items-center">
-                    <button id="buyTDX" class="col-xl-9 m-5 game-btn">Comprar TDX.<br>10000 Cucks.</button>
-                </div>
+        <section id="top">
+            <h1 class="">
+                THE GREAT
+                <br>
+                <span id="colorDisplay">RGB</span>
+                <br>
+                GUESSING GAME
+            </h1>
+            <div id="stripe">
+                <button id="resetBtn">New Colors</button>
+                <span id="message"></span>
+                <button class="mode">Easy</button>
+                <button class="mode selected">Hard</button>
             </div>
         </section>
-        <section class="game">
-            <section id="game">
-                <div class="container">
-                    <p class="points mt-5 m-4">Cucks: <span class="point">0</span></p>
-                    <div class="row d-flex justify-content-center align-items-center">
-                        <button id="breno" class="col-xl-2 m-5 game-btn">Breno, o mais insignificante.<br>+1</button>
-                        <button id="caio" class="col-xl-2 m-5 game-btn">Caio shitposting.<br>+2</button>
-                        <button id="castro" class="col-xl-2 m-5 game-btn">Castro ama gore.<br>+5</button>
-                    </div>
-                    <div class="row d-flex justify-content-center align-items-center">
-                        <button id="hazard" class="col-xl-2 m-5 game-btn">Hazard S2 pod.<br>+10</button>
-                        <button id="dk" class="col-xl-2 m-5 game-btn">DK webharem.<br>+15</button>
-                        <button id="jales" class="col-xl-2 m-5 game-btn">Jales sumindo.<br>+20</button>
-                    </div>
-                    <div class="row d-flex justify-content-center align-items-center">
-                        <button id="gabriel" class="col-xl-2 m-5 game-btn">Gabriel sendo cuck.<br>+30</button>
-                        <button id="gui" class="col-xl-2 m-5 game-btn">Gui, melhor Guilherme.<br>+50</button>
-                        <button id="misa" class="col-xl-2 m-5 game-btn">Misa, o Imortal.<br>+100</button>
-                    </div>
-                </div>
-            </section>
+        <section id="game">
+            <div id="container">
+                <div class="square"></div>
+                <div class="square"></div>
+                <div class="square"></div>
+                <div class="square"></div>
+                <div class="square"></div>
+                <div class="square"></div>
+            </div>
         </section>
-        <!-- Optional JavaScript -->
-        <!-- jQuery first, then Popper.js, then Bootstrap JS -->
         <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
