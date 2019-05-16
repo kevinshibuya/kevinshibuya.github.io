@@ -1,77 +1,61 @@
 * {
-    border: 0;
     padding: 0;
     margin: 0;
     font-family: 'Lato', sans-serif;
 }
-section {
-	color: white;
-	display: flex;
-	flex-direction: column;
-	align-items: center;
-	justify-content: center;
-	text-align: center;
-	width: 100%;
-	height: 100vh;
-	scroll-snap-align: center;
-}
-section h1 {
-	font-size: 4rem;
-}
-section p {
-	font-size: 1.5rem;
-	width: 60%;
-}
-a {
-	text-decoration: none;
+div {
 	color: white;
 }
-ul a {
-    display: block;
+div h1 {
+    font-size: 4rem;
+    width: 60%;
+    padding: auto;
+    margin: auto;
+}
+div p {
+    font-size: 1.5rem;
+    width: 60%;
+    padding: auto;
+    margin: auto;
+}
+header {
+    position: absolute;
+    top: 44%;
+}
+.navbar a {
     letter-spacing: 0.5rem;
+    font-size: 1.5rem;
+	text-decoration: none;
+    color: white;
+    z-index: 999;
+    text-transform: uppercase;
+    position: fixed;
     opacity: 0;
 }
-ul a:hover {
+.navbar a:hover {
     background: white;
     color: black;
+    transition: 0.5s;
 }
-.logo {
-    opacity: 0;
-	margin-left: 0;
-	margin-top: 5%;
-    font-size: 1.5rem;
-	display: block;
-	position: fixed;
+.navbar li {
+    margin-bottom: 10px;
 }
-.menu {
-	padding-top: 20%;
-	font-size: 1.5rem;
-	float: left;
-	margin-left: 0%;
-	text-transform: uppercase;
-	list-style: none;
-	display: block;
-	position: fixed;
-}
-.shadow {
-    text-shadow: 5px 5px 10px black;
-}
-.small {
-    color: rgb(173, 173, 173);
-    font-size: 1.6rem;
+.section {
+    text-align: center;
 }
 .title {
 	font-size: 5rem;
-	border-bottom: 2px solid white;
 	font-weight: normal;
-    letter-spacing: 0.3rem;
+    letter-spacing: 0.5rem;
     opacity: 0;
+    text-align: center;
 }
 .sub {
 	font-size: 3.5rem;
 	font-weight: lighter;
-    letter-spacing: 0.3rem;
+    letter-spacing: 1rem;
     opacity: 0;
+    text-align: center;
 }
 .content {
     overflow: auto;
@@ -96,12 +80,3 @@ ul a:hover {
     -ms-filter: blur(3px);
     filter: blur(3px);
 }
-[data-scroll] {
-    transition: all 1.5s;
-  }
-  [data-scroll="in"] {
-    opacity: 1;
-  }
-  [data-scroll="out"] {
-    opacity: 0;
-  }
