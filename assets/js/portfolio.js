@@ -1,16 +1,18 @@
-$('.menu a').on('click', function(e) {
-	if (this.hash !== '') {
-		e.preventDefault();
-		
-		const hash = this.hash;
-		
-		$('html, body').animate(
-		{
-			scrollTop: $(hash).offset().top
-		},
-		500
-		);
-	}
+//calls fullPage.js
+$(document).ready(function() {
+	$('#fullpage').fullpage({
+		//options here
+		autoScrolling:true,
+		scrollHorizontally: true
+	});
+
+	//methods
+	$.fn.fullpage.setAllowScrolling(false);
+});
+
+//declare pages with fullPage.js
+var myFullpage = new fullpage('#fullpage', {
+    anchors:['landing', 'about', 'projects', 'contact']
 });
 
 let tl = anime.timeline({
@@ -18,13 +20,7 @@ let tl = anime.timeline({
     duration: 750
 });
 tl.add({
-    targets: '.logo',
-    translateX: 100,
-    opacity: 1,
-    duration: 500
-});
-tl.add({
-    targets: 'header ul li a',
+    targets: '.navbar a',
     translateX: 100,
     opacity: 1,
     delay: anime.stagger(500)
@@ -41,7 +37,3 @@ tl.add({
     duration: 500,
     easing: 'linear'
 }, '-=500');
-
-ScrollOut({
-    threshold: .3
-  });
